@@ -17,9 +17,9 @@ function createImgCardsMarkup(items) {
                     <img
                         class="gallery__image"
                         src="${preview}"
-                        data-source="${original}"                        alt="${description}"
-                    />
-                </ >
+                        data-source="${original}"             
+                        alt="${description}"/>
+                </a>
             </div >`;
     })
     .join("");
@@ -32,21 +32,18 @@ let instance = {};
 function galleryContainerClick(evt) {
     evt.preventDefault();
 
-    if (!evt.target.dataset.source) {
+        if (!evt.target.dataset.source) {
         return;
     }
-    const options = {
-        onClose: (instance) => {
-            document.removeEventListener('keydown', onEscapePress)
-        }
-    };
-    instance = basicLightbox.create('<img src="${evt.target.dataset.source}">', options)
+    instance = basicLightbox.create(`<img src="${evt.target.dataset.source}" width="800" height="600">`);
     instance.show(document.addEventListener('keydown', onEscapePress));
+    
 
 };
 function onEscapePress(evt) {
     if (evt.key === 'Escape') {
         instance.close();
         document.removeEventListener('keydown', onEscapePress);
+        
     } 
 }
